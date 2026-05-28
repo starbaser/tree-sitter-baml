@@ -592,6 +592,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "block_attribute",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1401,6 +1411,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "block_attribute",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2107,9 +2127,13 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "block_attribute",
+          "named": true
+        },
         {
           "type": "function_parameters",
           "named": true

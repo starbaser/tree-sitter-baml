@@ -52,6 +52,7 @@ module.exports = grammar({
 
     // Enum declaration
     enum_declaration: $ => seq(
+      repeat($.block_attribute),
       'enum',
       field('name', $.identifier),
       '{',
@@ -64,6 +65,7 @@ module.exports = grammar({
 
     // Class/Interface declaration
     class_declaration: $ => seq(
+      repeat($.block_attribute),
       choice('class', 'override'),
       field('name', $.identifier),
       '{',
@@ -74,13 +76,15 @@ module.exports = grammar({
       '}',
     ),
 
-    class_property: $ => seq(
+    class_property: $ => prec.right(seq(
       field('name', $.identifier),
       field('type', $.type_definition),
-    ),
+      repeat($.block_attribute),
+    )),
 
     // Template string declaration
     template_string_declaration: $ => seq(
+      repeat($.block_attribute),
       'template_string',
       field('name', $.identifier),
       optional($.function_parameters),
@@ -95,6 +99,7 @@ module.exports = grammar({
 
     // Function declaration
     function_declaration: $ => seq(
+      repeat($.block_attribute),
       'function',
       field('name', $.identifier),
       field('parameters', $.function_parameters),
@@ -284,7 +289,11 @@ module.exports = grammar({
 
     nested_object: $ => seq(
       '{',
-      repeat($.property_assignment),
+      optional(seq(
+        $.property_assignment,
+        repeat(seq(optional(','), $.property_assignment)),
+        optional(','),
+      )),
       '}',
     ),
 

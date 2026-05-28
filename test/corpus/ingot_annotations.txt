@@ -1,0 +1,66 @@
+=================
+Ingot annotations
+=================
+
+@@ingot({ idempotent true, conduit_lambda "check" })
+function Check(query: string) -> string {
+  client GPT4
+  prompt #"{{ query }}"#
+}
+
+@@ingot({ hidden true })
+class Note {
+  text string @ingot({ readonly true })
+}
+
+---
+
+(source_file
+  (function_declaration
+    (block_attribute
+      (identifier)
+      (attribute_arguments
+        (nested_object
+          (property_assignment
+            (identifier)
+            (boolean_literal))
+          (property_assignment
+            (identifier)
+            (string_literal)))))
+    (identifier)
+    (function_parameters
+      (parameter
+        (identifier)
+        (type_definition
+          (primitive_type))))
+    (arrow_return_type
+      (type_definition
+        (primitive_type)))
+    (function_body
+      (client_property
+        (identifier))
+      (prompt_property
+        (block_string
+          (string_delimiter)
+          (string_content)
+          (string_delimiter)))))
+  (class_declaration
+    (block_attribute
+      (identifier)
+      (attribute_arguments
+        (nested_object
+          (property_assignment
+            (identifier)
+            (boolean_literal)))))
+    (identifier)
+    (class_property
+      (identifier)
+      (type_definition
+        (primitive_type))
+      (block_attribute
+        (identifier)
+        (attribute_arguments
+          (nested_object
+            (property_assignment
+              (identifier)
+              (boolean_literal))))))))
